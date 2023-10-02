@@ -2,7 +2,9 @@ import pandas as pd
 import plotly.express as px
 
 historical_data_cee = pd.read_csv('./cee_historical_data.csv')
-cee_3y = historical_data_cee[(historical_data_cee.index >= '01/01/2020') & (historical_data_cee.index < '01/10/2023')]
+historical_data_cee.Date = pd.to_datetime(historical_data_cee.Date, format="%Y-%m-%d")
+print(historical_data_cee.dtypes)
+cee_3y = historical_data_cee[(historical_data_cee.Date >= '2020-01-01') & (historical_data_cee.Date < '2023-10-01')]
 
 fig = px.line(cee_3y, 
               x=cee_3y.index, 
